@@ -2,7 +2,7 @@ import streamlit as st
 from haystack.nodes import PromptNode, PromptTemplate
 import snscrape.modules.twitter as sntwitter
 import pandas as pd
-
+from hidden import api_key
 def get_data(username,tweets):
         attributes_container = []
         for i, tweet in enumerate(sntwitter.TwitterSearchScraper(f'from:{username}').get_items()):
@@ -44,7 +44,7 @@ def query(prompter, template):
 
 if __name__ == "__main__":
     twett = get_data("narendramodi")
-    prompt,template=start_haystack("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",twett)
+    prompt,template=start_haystack(api_key,twett)
 
     results = query(prompt, template)
     print(results)

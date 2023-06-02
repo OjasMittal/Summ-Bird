@@ -51,5 +51,3 @@ if button and username:
         st.write("Kindly reduce the no. of tweets to summarize")
 elif button and not username:
     st.warning("Please enter a twitter handle")
-
-
