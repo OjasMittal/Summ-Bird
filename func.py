@@ -3,6 +3,8 @@ from haystack.nodes import PromptNode, PromptTemplate
 import snscrape.modules.twitter as sntwitter
 import pandas as pd
 from hidden import api_key
+
+@st.cache_data(show_spinner=False)
 def get_data(username,tweets):
         attributes_container = []
         for i, tweet in enumerate(sntwitter.TwitterSearchScraper(f'from:{username}').get_items()):
@@ -17,6 +19,7 @@ def get_data(username,tweets):
 
 
 #@st.cache(hash_funcs={"builtins.CoreBPE": lambda _: None}, show_spinner=False, allow_output_mutation=True)
+@st.cache_resource(show_spinner=False)
 def start_haystack(openai_key,tweets):
     prompt_node = PromptNode(model_name_or_path="text-davinci-003", api_key=openai_key)
     try:

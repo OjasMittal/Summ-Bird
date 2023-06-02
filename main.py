@@ -25,27 +25,21 @@ st.write("")
 st.markdown("<h5 style= padding-bottom:0px; margin-bottom: 0px>How many tweets do you want to summarize?</h5>",unsafe_allow_html=True)
 no_tweets = st.slider("",1,20)
 button=st.button("Know")
-if "button" not in st.session_state:
-    st.session_state["button"] = False
-
-if "show" not in st.session_state:
-    st.session_state["show"] = False
-
-if button and username:
-    st.session_state["button"] = not st.session_state["button"]
+if st.session_state.get('button') != True:
+    st.session_state['button'] = button
+if st.session_state['button'] == True and username:
     try:
-        with st.spinner("Summarizing..."):
+        with st.spinner("Loading⏳....."):
             tweets = get_data(username,no_tweets)
             prompt, template = start_haystack(api_key,tweets)
             results = query(prompt, template)
             ans=results[0]
             st.markdown(f"<h4 style='font-family: Roboto; font-weight: normal;'>{ans}</h4>", unsafe_allow_html=True)
             show=st.button("Show Tweets")
-            if st.session_state["button"]:
-                if show:
-                    st.session_state["show"] = not st.session_state["show"]
-            if st.session_state["show"]:
-                st.markdown(f"<h4 style='font-family: Roboto; font-weight: normal;'>hiiii</h4>", unsafe_allow_html=True)
+            if show:
+                st.session_state['show']= True
+                st.markdown(f"<h4 style='font-family: Roboto; font-weight: normal;'>{tweets}</h4>", unsafe_allow_html=True)
+
     except Exception as e:
         st.write(e)
         st.write("Kindly reduce the no. of tweets to summarize")
