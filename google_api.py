@@ -1,60 +1,11 @@
-#import requests
-#import datetime
-"""
-# Define search parameters
-search_engine_id = "your engine id"
-api_key = "your api key (hidden)"
-query = "india-nepal relations"
-
-# Define API endpoint and parameters
-url = "your url"
-params = {
-    "cx": search_engine_id,
-    "key": api_key,
-    "q": query,
-    "sort": "date:r:20100101:{}".format(datetime.date.today().strftime("%Y%m%d")),
-    "num": 10,
-    "fields": "items(title,link,pubDate)"
-}
-
-# Make API request and retrieve results
-response = requests.get(url, params=params)
-result = response.json()
-
-# Check if response contains any errors
-if "error" in result:
-    error_message = result["error"]["message"]
-    print(f"API Error: {error_message}")
-else:
-    # Print titles and links of each article
-    if "items" in result:
-        for item in result["items"]:
-            print(item["title"])
-            print(item["link"])
-            if "pubDate" in item:
-                print(item["pubDate"])
-            print()
-    else:
-        print("No items found in the response.")
-
-print(result)
-"""
-
-
 from googleapiclient.discovery import build
-
-# Set up your API key and search engine ID
-API_KEY = 'your api key (hidden)'
-SEARCH_ENGINE_ID = 'your engine id'
+API_KEY = 'AIzaSyDJuQhr_kZWartlIic-qV4LMB4bNoASzA4'
+SEARCH_ENGINE_ID = 'e77aadef9bb7b49c1'
 
 def get_latest_articles(query):
-    # Create a service object using your API key
     service = build('customsearch', 'v1', developerKey=API_KEY)
-
-    # Make the search request
-    res = service.cse().list(q=query, cx=SEARCH_ENGINE_ID, num=5).execute()
-
-    # Retrieve the search results
+    word="Tweets about"+query
+    res = service.cse().list(q=word, cx=SEARCH_ENGINE_ID, num=5).execute()
     articles = []
     if 'items' in res:
         for item in res['items']:
@@ -67,13 +18,16 @@ def get_latest_articles(query):
 
     return articles
 
-# Example usage
-query = 'india-nepal war'
-latest_articles = get_latest_articles(query)
+if __name__ == '__main__':
+    query = """These topics include film critics, the platform itself, " 
+            "cows and climate change, and France.The profile has tweeted about" 
+            " film critics in a sarcastic tone, such as Audience score is what matters, as film critics" 
+            " are terrified of being ostracized for wrong-think" (@MattWalshBlog).The profile has also been tweeting about the platform, often in a humorous way, such as 
+            "This platform honestly gives me more laughs per day than everything else combined!" (@cb_doge)."""
+    latest_articles = get_latest_articles(query)
 
-# Print the results
-for article in latest_articles:
-    print('Title:', article['title'])
-    print('Link:', article['link'])
-    print('Snippet:', article['snippet'])
-    print()
+    for article in latest_articles:
+        print('Title:', article['title'])
+        print('Link:', article['link'])
+        print('Snippet:', article['snippet'])
+        print()
