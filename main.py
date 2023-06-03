@@ -12,7 +12,6 @@ def load_lottie_url(url: str):
         return None
     return r.json()
 
-
 def clear_submit():
     st.cache_data.clear()
 
