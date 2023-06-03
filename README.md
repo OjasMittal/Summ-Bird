@@ -77,6 +77,6 @@ These remarkable tools and libraries contribute to the seamless functioning of S
 
 ## 📞 Contact
 
-If you have any questions, suggestions, or feedback, please feel free to reach out to us at [your-email@example.com](mailto:your-email@example.com). We value your input and look forward to hearing from you! 📬🦜
+If you have any questions, suggestions, or feedback, please feel free to reach out to us at [your-email@example.com](mailto:ojasfarm31@gmail.com). We value your input and look forward to hearing from you! 📬🦜
 
 Let's embark on this fascinating journey with Summ-Bird and make the av
