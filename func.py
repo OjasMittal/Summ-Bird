@@ -26,9 +26,10 @@ def start_haystack(openai_key,tweets):
     prompt_node = PromptNode(model_name_or_path="text-davinci-003", api_key=openai_key)
     try:
         #twitter_template = PromptTemplate(name="twitter",prompt_text = f"""You are given a twitter stream belonging to a specific profile.{tweets}
-                                                                   # Answer with a summary of what they've lately been tweeting about and in what languages.
-                                                                  #  You may go into some detail about what topics they tend to like tweeting about. Please also mention their overall tone, for example: positive,
-                                                                   # negative, political, sarcastic or something else.
+                                                                  #  Answer with a summary of what they've lately been tweeting about and in what languages.
+                                                                  #  You may go into some detail about what topics they tend to like tweeting about.
+                                                                  #  Please also mention their overall tone, for example: positive,
+                                                                  #  negative, political, sarcastic or something else.
                                                                   #  """)
 
         twitter_template = PromptTemplate(
@@ -62,13 +63,36 @@ def query(prompter, template):
     try:
         result = prompter.prompt(prompt_template=template, max_time=30,max_tokens=1500)
     except Exception as e:
-        print(e)
+        st.warning(e)
         result = ["Please make sure you are providing a correct, public twitter account"]
     return result
 
-if __name__ == "__main__":
-    twett,lst = get_data("narendramodi")
-    prompt,template=start_haystack(api_key,twett)
+def get_keyword(openai_key,results):
+    prompter = PromptNode(model_name_or_path="text-davinci-003", api_key=openai_key)
+    summary = PromptTemplate(name="summary",
+                                  prompt_text=f"""You are given a twitter stream belonging to a specific profile.{results}
+                                  Give me a list of all the keywords separated by a space in the summary
+                                  The output should be of format: keyword1 keyword2 keyword3  
+                                  without any commas ,special characters or brackets""")
+    try:
+        keywords=prompter.prompt(prompt_template=summary, max_time=30)
+    except Exception as e:
+        print(e)
+        keywords = ["Please make sure you are providing a correct, public twitter account"]
+    return keywords
 
+def Convert(string):
+    li = list(string.split(" "))
+    return li
+
+if __name__ == "__main__":
+    twett,lst = get_data("narendramodi",7)
+    prompt,template=start_haystack(api_key,twett)
     results = query(prompt, template)
     print(results)
+    summary_temp = PromptTemplate(name="summary",
+                             prompt_text = f"""You are given a twitter stream belonging to a specific profile.{results}
+                              Give me a python list of all the keywords in the summary""")
+    keywords = get_keyword(api_key,results)
+    keys=Convert(keywords[0])
+    print("Keywords are:",keys)

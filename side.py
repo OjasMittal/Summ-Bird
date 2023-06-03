@@ -11,14 +11,13 @@ def load_lottie_url(url: str):
 
 def sidebar():
     with st.sidebar:
-        st.markdown("<h1 style='font-style: italic;padding-top:0px;margin-top:0px; color: #00000;'>Hello Bird !</h1>", unsafe_allow_html=True)
+        st.markdown("<h1 style='font-style: italic;padding-top:0px;margin-top:0px; color: #00000;'>Hey Bird👋 </h1>", unsafe_allow_html=True)
         st.write("")
 
         st.subheader("ABOUT:")
-        st.markdown("<span style='font-size: 20px;'>"
-                    "Introducing Summ-Tweet, our quirky project. "
-                    "It summarizes tweets from chosen handles using Python, Twitter API, and OpenAI's GPT model. "
-                    "It saves you time and keeps you in the loop!"
+        st.markdown("<span style='font-size: 20px;'>Summ-Bird is a powerful Python-based project that brings a touch of magic to Twitter data analysis. "
+                    "With Summ-Bird, you can extract vital information and generate concise summaries from multiple tweets "
+                    "of your favorite Twitter handles. It's time to unlock the secrets of the avian world!"
                     "</span>",
                     unsafe_allow_html=True)
 
@@ -30,7 +29,7 @@ def sidebar():
                     "<br>2. Drag and select how many tweets you want a summary of."
                     "<br>3. Click Know."
                     "<br>4. Voila! Your summary is here!"
-                    "<br>5. To view Tweet Sources, click on the Show Sources button.</p>",
+                    "<br>5. To view Additional Materials, select a keyword from the SelectBox.</p>",
                     unsafe_allow_html=True)
         col1,col2,col3= st.columns([1,5,1])
         with col2:
