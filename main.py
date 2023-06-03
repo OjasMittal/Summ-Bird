@@ -12,7 +12,6 @@ def load_lottie_url(url: str):
         return None
     return r.json()
 
-
 hide_menu_style="""
 <style>
 footer{visibility:hidden;}

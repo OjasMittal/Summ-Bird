@@ -3,6 +3,7 @@ from haystack.nodes import PromptNode, PromptTemplate
 import snscrape.modules.twitter as sntwitter
 import pandas as pd
 
+
 api_key=st.secrets["api_key"]
 @st.cache_data(show_spinner=False)
 def get_data(username,tweets):
