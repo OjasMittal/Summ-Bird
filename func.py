@@ -21,7 +21,6 @@ def get_data(username,tweets):
         return all_tweets,lst
 
 
-#@st.cache(hash_funcs={"builtins.CoreBPE": lambda _: None}, show_spinner=False, allow_output_mutation=True)
 @st.cache_resource(show_spinner=False)
 def start_haystack(openai_key,tweets):
     prompt_node = PromptNode(model_name_or_path="text-davinci-003", api_key=openai_key)
@@ -55,12 +54,10 @@ def start_haystack(openai_key,tweets):
     except Exception as e:
         st.write("Kindly reduce the no. of tweets to summarize")
 
-    #st.session_state["haystack_started"] = True
 
     return prompt_node, twitter_template
 
 
-#@st.cache(hash_funcs={"builtins.CoreBPE": lambda _: None}, show_spinner=False, allow_output_mutation=True)
 def query(prompter, template):
     try:
         result = prompter.prompt(prompt_template=template, max_time=30,max_tokens=1500)
