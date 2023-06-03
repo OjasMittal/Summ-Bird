@@ -13,9 +13,11 @@ def get_data(username,tweets):
             attributes_container.append([tweet.date, tweet.likeCount, tweet.sourceLabel, tweet.rawContent])
         tweets_df = pd.DataFrame(attributes_container, columns=["Date Created", "Number of Likes", "Source of Tweet", "Tweets"])
         all_tweets = ""
+        lst=[]
         for tweet in tweets_df["Tweets"]:
             all_tweets += tweet
-        return all_tweets
+            lst.append(tweet)
+        return all_tweets,lst
 
 
 #@st.cache(hash_funcs={"builtins.CoreBPE": lambda _: None}, show_spinner=False, allow_output_mutation=True)
@@ -46,7 +48,7 @@ def query(prompter, template):
     return result
 
 if __name__ == "__main__":
-    twett = get_data("narendramodi")
+    twett,lst = get_data("narendramodi")
     prompt,template=start_haystack(api_key,twett)
 
     results = query(prompt, template)
