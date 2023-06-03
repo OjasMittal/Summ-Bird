@@ -26,11 +26,32 @@ def get_data(username,tweets):
 def start_haystack(openai_key,tweets):
     prompt_node = PromptNode(model_name_or_path="text-davinci-003", api_key=openai_key)
     try:
-        twitter_template = PromptTemplate(name="twitter",prompt_text = f"""You are given a twitter stream belonging to a specific profile.{tweets} 
-                                                                    Answer with a summary of what they've lately been tweeting about and in what languages.
-                                                                    You may go into some detail about what topics they tend to like tweeting about. Please also mention their overall tone, for example: positive,
-                                                                    negative, political, sarcastic or something else.
-                                                                    """)
+        #twitter_template = PromptTemplate(name="twitter",prompt_text = f"""You are given a twitter stream belonging to a specific profile.{tweets}
+                                                                   # Answer with a summary of what they've lately been tweeting about and in what languages.
+                                                                  #  You may go into some detail about what topics they tend to like tweeting about. Please also mention their overall tone, for example: positive,
+                                                                   # negative, political, sarcastic or something else.
+                                                                  #  """)
+
+        twitter_template = PromptTemplate(
+            name="twitter",
+            prompt_text=f"""You are given a Twitter stream belonging to a specific profile. {tweets}
+                Answer with a summary of what they've lately been tweeting about and in what languages.
+                You may go into some detail about what topics they tend to like tweeting about. Please also mention their overall tone, for example: positive,
+                negative, political, sarcastic, or something else.
+
+                - Summarize the main themes and subjects the profile has been tweeting about recently.
+                - Provide examples of significant tweets related to each theme or subject.
+                - Analyze the sentiment of the tweets. Are they mostly positive, negative, or neutral?
+                - Identify any trending topics or hashtags the profile has engaged with.
+                - Suggest additional sources or articles related to the topics mentioned in the summary.
+                - Offer insights into the profile's tweeting style or patterns.
+                - Are there any recurring phrases or keywords that stand out in their tweets?
+                - Mention any notable engagements or interactions the profile has had with other users.
+
+                For each theme or topic mentioned in the summary, provide further information or sources that can help deepen the understanding of those specific subjects.
+                Additionally, suggest relevant books, research papers, or authoritative websites where the user can find more information on the trending topics mentioned in the summary.
+                """
+        )
     except Exception as e:
         st.write("Kindly reduce the no. of tweets to summarize")
 
