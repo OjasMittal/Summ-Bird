@@ -2,12 +2,12 @@
 #import datetime
 """
 # Define search parameters
-search_engine_id = "e77aadef9bb7b49c1"
-api_key = "AIzaSyDJuQhr_kZWartlIic-qV4LMB4bNoASzA4"
+search_engine_id = "your engine id"
+api_key = "your api key (hidden)"
 query = "india-nepal relations"
 
 # Define API endpoint and parameters
-url = "https://cse.google.com/cse?cx=e77aadef9bb7b49c1"
+url = "your url"
 params = {
     "cx": search_engine_id,
     "key": api_key,
@@ -44,8 +44,8 @@ print(result)
 from googleapiclient.discovery import build
 
 # Set up your API key and search engine ID
-API_KEY = 'AIzaSyDJuQhr_kZWartlIic-qV4LMB4bNoASzA4'
-SEARCH_ENGINE_ID = 'e77aadef9bb7b49c1'
+API_KEY = 'your api key (hidden)'
+SEARCH_ENGINE_ID = 'your engine id'
 
 def get_latest_articles(query):
     # Create a service object using your API key
