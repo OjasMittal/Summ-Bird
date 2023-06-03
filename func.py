@@ -2,8 +2,8 @@ import streamlit as st
 from haystack.nodes import PromptNode, PromptTemplate
 import snscrape.modules.twitter as sntwitter
 import pandas as pd
-from hidden import api_key
 
+api_key=st.secrets["api_key"]
 @st.cache_data(show_spinner=False)
 def get_data(username,tweets):
         attributes_container = []
